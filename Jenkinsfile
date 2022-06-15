@@ -12,6 +12,7 @@ pipeline {
             agent { label 'rishi12' }
             steps{
                 sh 'mvn clean '
+                sh '/usr/local/apache-maven-3.8.6'
             }
         }
 
