@@ -1,5 +1,4 @@
 pipeline {
-    agent none
     stages { 
         stage('SCM Checkout') {
             agent { label 'rishi12' }
@@ -11,8 +10,8 @@ pipeline {
         stage('Build package') {
             agent { label 'rishi12' }
             steps{
-                sh 'mvn clean '
-                sh '/usr/local/apache-maven-3.8.6'
+                sh 'mvn clean package '
+                
             }
         }
 
