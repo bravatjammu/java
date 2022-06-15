@@ -1,4 +1,5 @@
 pipeline {
+    agent { label 'rishi12'}
     stages { 
         stage('SCM Checkout') {
             agent { label 'rishi12' }
