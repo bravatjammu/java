@@ -14,7 +14,7 @@ pipeline {
             // Get some code from a GitHub repository
             git branch: 'main', url: 'https://github.com/bravatjammu/spring-petclinic.git'
             // Run Maven on a Unix agent.
-            sh "mvn clean package"
+            sh "mvn clean "
 
             }
         }
