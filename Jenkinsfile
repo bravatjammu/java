@@ -1,31 +1,20 @@
 pipeline {
-    agent any
-    triggers{
-        // Triggers pipeline for every commit on git repo
-        pollSCM '* * * * *'
-    }
-   
-    stages {
-        stage('Stage 1'){
-        agent {
-            label 'rishi12'
-        }
-        steps {
-            // Get some code from a GitHub repository
-            git branch: 'main', url: 'https://github.com/bravatjammu/spring-petclinic.git'
-            // Run Maven on a Unix agent.
-            sh "mvn clean "
-
+    agent none
+    stages { 
+        stage('SCM Checkout') {
+            agent { label 'master' }
+            steps{
+            git url: 'https://github.com/bravatjammu/java.git', branch: "main"
             }
         }
 
-    }
-        post{
-                // If Maven was able to run the tests, even if some of the test
-                // failed, record the test results and archive the jar file.
-                success {
-                    junit '**/target/surefire-reports/TEST-*.xml'
-                    archiveArtifacts 'target/*.jar'
-                }
+        stage('Build package') {
+            agent { label 'rishi12' }
+            steps{
+                sh 'sudo mvn clean '
             }
+        }
+
+        
+    }
 }
